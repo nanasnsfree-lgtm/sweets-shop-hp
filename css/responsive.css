@@ -1,0 +1,167 @@
+/* タブレット */
+@media (max-width: 1023px) {
+  .selection-grid,
+  .philosophy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* モバイル */
+@media (max-width: 767px) {
+  .section {
+    padding: 80px 0;
+  }
+
+  .section-label {
+    font-size: 48px;
+  }
+
+  .section-lead {
+    margin-bottom: 40px;
+  }
+
+  /* ナビゲーション */
+  .hamburger {
+    display: flex;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: #fff;
+    padding: 100px 40px 40px;
+    transition: right var(--transition);
+    box-shadow: -4px 0 30px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+  }
+
+  .nav.open {
+    right: 0;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-list li {
+    width: 100%;
+  }
+
+  .nav-list a {
+    display: block;
+    padding: 16px 0;
+    color: var(--color-text) !important;
+    font-size: 13px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav-list a::after {
+    display: none;
+  }
+
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 998;
+  }
+
+  .nav-overlay.active {
+    display: block;
+  }
+
+  /* ヒーロー */
+  .hero {
+    min-height: 100vh;
+  }
+
+  .hero-content h1 {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+
+  .hero-sub {
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+
+  /* ABOUT */
+  .about-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .about-image img {
+    height: 280px;
+  }
+
+  /* SELECTION */
+  .selection-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* PHILOSOPHY */
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* MENU */
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .menu-img {
+    height: 150px;
+  }
+
+  .menu-body {
+    padding: 14px 12px;
+  }
+
+  .menu-body h3 {
+    font-size: 13px;
+  }
+
+  /* SHOP */
+  .shop-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .shop-image img {
+    height: 250px;
+  }
+
+  /* NEWS */
+  .news-item {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .news-title {
+    width: 100%;
+  }
+
+  /* フッター */
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}

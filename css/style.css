@@ -1,0 +1,741 @@
+/* カラーパレット・グローバル変数 */
+:root {
+  --color-primary: #8B6F47;
+  --color-primary-light: #B8956A;
+  --color-primary-dark: #6B5535;
+  --color-accent: #D4A574;
+  --color-bg: #FFFFFF;
+  --color-bg-alt: #FAF8F5;
+  --color-text: #333333;
+  --color-text-light: #777777;
+  --color-border: #E8E4DF;
+  --shadow-card: 0 2px 20px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --radius: 4px;
+  --radius-lg: 8px;
+  --transition: 0.3s ease;
+  --font-serif: "Playfair Display", "Georgia", serif;
+  --font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+}
+
+/* リセット */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.9;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* セクション共通 */
+.section {
+  padding: 120px 0;
+}
+
+.section-alt {
+  background: var(--color-bg-alt);
+}
+
+.section-label {
+  font-family: var(--font-serif);
+  font-size: 64px;
+  font-weight: 400;
+  color: var(--color-border);
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 6px;
+  margin-bottom: 12px;
+  color: var(--color-text);
+}
+
+.section-lead {
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 60px;
+}
+
+/* ボタン */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 40px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+/* スクロールアニメーション */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================
+   ヘッダー
+   ======================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 20px 0;
+  transition: all var(--transition);
+  background: transparent;
+}
+
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 var(--color-border);
+  padding: 12px 0;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 4px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.logo span {
+  font-size: 22px;
+  letter-spacing: 6px;
+}
+
+.header.scrolled .logo {
+  color: var(--color-text);
+}
+
+.nav-list {
+  display: flex;
+  gap: 36px;
+}
+
+.nav-list a {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #fff;
+  position: relative;
+  padding: 4px 0;
+}
+
+.nav-list a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width var(--transition);
+}
+
+.nav-list a:hover::after {
+  width: 100%;
+}
+
+.header.scrolled .nav-list a {
+  color: var(--color-text);
+}
+
+/* ハンバーガーメニュー */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 1px;
+  background: #fff;
+  transition: all var(--transition);
+}
+
+.header.scrolled .hamburger span {
+  background: var(--color-text);
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ========================================
+   ヒーローセクション
+   ======================================== */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.hero-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #fff;
+  padding: 0 24px;
+}
+
+.hero-sub {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  letter-spacing: 4px;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.hero-content h1 {
+  font-family: var(--font-sans);
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: 4px;
+  margin-bottom: 40px;
+}
+
+.hero-indicators {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.hero-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.hero-dot.active {
+  background: #fff;
+}
+
+/* ========================================
+   ABOUTセクション
+   ======================================== */
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-image {
+  overflow: hidden;
+}
+
+.about-image img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.about-image:hover img {
+  transform: scale(1.03);
+}
+
+.about-text h3 {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+
+.about-text p {
+  font-size: 15px;
+  color: var(--color-text-light);
+  margin-bottom: 16px;
+  line-height: 2;
+}
+
+/* ========================================
+   SELECTIONセクション
+   ======================================== */
+.selection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.selection-card {
+  background: #fff;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition);
+}
+
+.selection-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+
+.selection-img {
+  overflow: hidden;
+  height: 220px;
+}
+
+.selection-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.selection-card:hover .selection-img img {
+  transform: scale(1.05);
+}
+
+.selection-body {
+  padding: 32px 28px;
+}
+
+.selection-num {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  color: var(--color-border);
+  display: block;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.selection-body h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.selection-body p {
+  font-size: 13px;
+  color: var(--color-text-light);
+  line-height: 2;
+}
+
+/* ========================================
+   PHILOSOPHYセクション
+   ======================================== */
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  text-align: center;
+}
+
+.philosophy-icon {
+  color: var(--color-primary);
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.philosophy-card h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+
+.philosophy-card p {
+  font-size: 14px;
+  color: var(--color-text-light);
+  line-height: 2;
+}
+
+/* ========================================
+   MENUセクション
+   ======================================== */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.menu-card {
+  background: #fff;
+  overflow: hidden;
+  transition: all var(--transition);
+}
+
+.menu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.menu-img {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+
+.menu-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.menu-card:hover .menu-img img {
+  transform: scale(1.05);
+}
+
+.menu-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 12px;
+  letter-spacing: 1px;
+}
+
+.menu-body {
+  padding: 20px 16px;
+}
+
+.menu-body h3 {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.menu-price {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--color-primary);
+  font-weight: 400;
+}
+
+/* ========================================
+   SHOPセクション
+   ======================================== */
+.shop-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.shop-image {
+  overflow: hidden;
+}
+
+.shop-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.shop-info h3 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  margin-bottom: 32px;
+}
+
+.shop-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 32px;
+}
+
+.shop-table tr {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.shop-table th,
+.shop-table td {
+  padding: 16px 0;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  vertical-align: top;
+}
+
+.shop-table th {
+  width: 100px;
+  color: var(--color-text-light);
+  letter-spacing: 1px;
+}
+
+.shop-table td a {
+  color: var(--color-primary);
+}
+
+.shop-table td a:hover {
+  text-decoration: underline;
+}
+
+.shop-sns {
+  display: flex;
+  gap: 20px;
+}
+
+.sns-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text-light);
+  transition: all var(--transition);
+}
+
+.sns-link:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ========================================
+   NEWSセクション
+   ======================================== */
+.news-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.news-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--color-border);
+  transition: opacity var(--transition);
+}
+
+.news-item:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.news-item:hover {
+  opacity: 0.7;
+}
+
+.news-date {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  color: var(--color-text-light);
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.news-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.news-title {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* ========================================
+   フッター
+   ======================================== */
+.footer {
+  background: var(--color-text);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 80px 0 40px;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.footer-logo {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 4px;
+  line-height: 1.4;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.footer-logo span {
+  font-size: 18px;
+  letter-spacing: 6px;
+}
+
+.footer-brand p {
+  font-size: 13px;
+  line-height: 2;
+}
+
+.footer-nav h4 {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+.footer-nav ul li {
+  margin-bottom: 12px;
+}
+
+.footer-nav ul a {
+  font-size: 13px;
+  transition: opacity var(--transition);
+}
+
+.footer-nav ul a:hover {
+  opacity: 0.5;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 24px;
+  text-align: center;
+}
+
+.footer-bottom p {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
